@@ -4,4 +4,4 @@
 
 int _putchar(char c);
 
-#endif // !PRINT_F
+#endif
