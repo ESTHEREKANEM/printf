@@ -12,7 +12,7 @@
 
 int myIdentifier(char next, va_list args)
 {
-	int functsIndex;
+	int j;
 
 	identifierStruct functs[] = {
 		{"c", print_char},
@@ -28,10 +28,10 @@ int myIdentifier(char next, va_list args)
 		{NULL, NULL}
 	};
 
-	for (functsIndex = 0; functs[functsIndex].indentifier != NULL; functsIndex++)
+	for (j = 0; functs[j].indentifier != NULL; j++)
 	{
-		if (functs[functsIndex].indentifier[0] == next)
-			return (functs[functsIndex].printer(args));
+		if (functs[j].indentifier[0] == next)
+			return (functs[j].printer(args));
 	}
 	return (0);
 }
