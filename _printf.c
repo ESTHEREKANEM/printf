@@ -3,14 +3,14 @@
 #include <stdio.h>
 
 /**
- * printIdentifiers - prints special characters
+ * myIdentifier - prints special characters
  * @next: character after the %
  * @args: argument for the indentifier
  * Return: the number of characters printed
  * (excluding the null byte used to end output to strings)
  */
 
-int printIdentifiers(char next, va_list args)
+int myIdentifier(char next, va_list args)
 {
 	int functsIndex;
 
@@ -75,7 +75,8 @@ int _printf(const char *format, ...)
 		if (format[i + 1] == '\0')
 			return (-1);
 			i++;
-		detectedIdentifier = printIdentifiers(format[i], args);
+
+		detectedIdentifier = myIdentifier(format[i], args);
 		if (detectedIdentifier == -1 || detectedIdentifier != 0)
 		if (detectedIdentifier > 0)
 			inputCount += detectedIdentifier;
