@@ -78,6 +78,7 @@ int _printf(const char *format, ...)
 
 		detectedIdentifier = myIdentifier(format[i], args);
 		if (detectedIdentifier == -1 || detectedIdentifier != 0)
+			;
 		if (detectedIdentifier > 0)
 			inputCount += detectedIdentifier;
 
