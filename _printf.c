@@ -74,10 +74,9 @@ int _printf(const char *format, ...)
 		}
 		if (format[i + 1] == '\0')
 			return (-1);
-
-		detectedIdentifier = printIdentifiers(format[i + 1], arg);
-		if (detectedIdentifier == -1 || detectedIdentifier != 0)
 			i++;
+		detectedIdentifier = printIdentifiers(format[i], arg);
+		if (detectedIdentifier == -1 || detectedIdentifier != 0)
 		if (detectedIdentifier > 0)
 			inputCount += detectedIdentifier;
 
