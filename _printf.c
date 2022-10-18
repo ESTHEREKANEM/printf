@@ -74,11 +74,10 @@ int _printf(const char *format, ...)
 		}
 		if (format[i + 1] == '\0')
 			return (-1);
-			i++;
 
-		detectedIdentifier = myIdentifier(format[i], args);
+		detectedIdentifier = myIdentifier(format[i + 1], args);
 		if (detectedIdentifier == -1 || detectedIdentifier != 0)
-			;
+			i++;
 		if (detectedIdentifier > 0)
 			inputCount += detectedIdentifier;
 
