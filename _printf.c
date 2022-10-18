@@ -5,12 +5,12 @@
 /**
  * printIdentifiers - prints special characters
  * @next: character after the %
- * @arg: argument for the indentifier
+ * @args: argument for the indentifier
  * Return: the number of characters printed
  * (excluding the null byte used to end output to strings)
  */
 
-int printIdentifiers(char next, va_list arg)
+int printIdentifiers(char next, va_list args)
 {
 	int functsIndex;
 
@@ -31,7 +31,7 @@ int printIdentifiers(char next, va_list arg)
 	for (functsIndex = 0; functs[functsIndex].indentifier != NULL; functsIndex++)
 	{
 		if (functs[functsIndex].indentifier[0] == next)
-			return (functs[functsIndex].printer(arg));
+			return (functs[functsIndex].printer(args));
 	}
 	return (0);
 }
@@ -51,9 +51,9 @@ int _printf(const char *format, ...)
 {
 	unsigned int i;
 	int detectedIdentifier = 0, inputCount = 0;
-	va_list arg;
+	va_list args;
 
-	va_start(arg, format);
+	va_start(args, format);
 	if (format == NULL)
 		return (-1);
 
@@ -75,7 +75,7 @@ int _printf(const char *format, ...)
 		if (format[i + 1] == '\0')
 			return (-1);
 			i++;
-		detectedIdentifier = printIdentifiers(format[i], arg);
+		detectedIdentifier = printIdentifiers(format[i], args);
 		if (detectedIdentifier == -1 || detectedIdentifier != 0)
 		if (detectedIdentifier > 0)
 			inputCount += detectedIdentifier;
@@ -86,6 +86,6 @@ int _printf(const char *format, ...)
 			inputCount++;
 		}
 	}
-	va_end(arg);
+	va_end(args);
 	return (inputCount);
 }
