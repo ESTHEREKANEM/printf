@@ -1,37 +1,43 @@
-#include <stdarg.h>
 #include "main.h"
 /**
- * _printf - This is the entry point for a printf function clone.
- *
- * @format: this is the first parameter passed to the function
- * which mostlikely is a string
- *
- * @...: this are other functions that would be saved as args.
- *
- * Return: the number of character printed excluding the end output to string.
-*/
-
+ * _printf - printf function
+ * @format: const char pointer
+ * Return: b_len
+ */
 int _printf(const char *format, ...)
 {
-	int i = 0;
-	va_list args;
+	int (*pfunc)(va_list, flags_t *);
+	const char *p;
+	va_list arguments;
+	flags_t flags = {0, 0, 0};
 
-	va_start(args, format);
+	register int count = 0;
 
-	for (i = 0; i != '\0'; i++)
+	va_start(arguments, format);
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (p = format; *p; p++)
 	{
-		if (format[i] == '%')
+		if (*p == '%')
 		{
-			i++;
-
-			if (format[i] == 'c' || format[i] == 's')
+			p++;
+			if (*p == '%')
 			{
-				char c = (char) va_arg(args, int);
-				_putchar(c);
+				count += _putchar('%');
+				continue;
 			}
-		}
-		_putchar(format[i]);
+			while (get_flag(*p, &flags))
+				p++;
+			pfunc = get_print(*p);
+			count += (pfunc)
+				? pfunc(arguments, &flags)
+				: _printf("%%%c", *p);
+		} else
+			count += _putchar(*p);
 	}
-
-	return (i);
+	_putchar(-1);
+	va_end(arguments);
+	return (count);
 }
