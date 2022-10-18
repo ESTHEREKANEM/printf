@@ -14,7 +14,7 @@ int myIdentifier(char next, va_list args)
 {
 	int j;
 
-	identifierStruct functs[] = {
+	identifier_Struct functs[] = {
 		{"c", print_char},
 		{"s", print_str},
 		{"d", print_int},
