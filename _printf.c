@@ -50,7 +50,7 @@ int printIdentifiers(char next, va_list arg)
 int _printf(const char *format, ...)
 {
 	unsigned int i;
-	int identifierPrinted = 0, charPrinted = 0;
+	int identifierPrinted = 0, inputCount = 0;
 	va_list arg;
 
 	va_start(arg, format);
@@ -62,13 +62,13 @@ int _printf(const char *format, ...)
 		if (format[i] != '%')
 		{
 			_putchar(format[i]);
-			charPrinted++;
+			inputCount++;
 			continue;
 		}
 		if (format[i + 1] == '%')
 		{
 			_putchar('%');
-			charPrinted++;
+			inputCount++;
 			i++;
 			continue;
 		}
@@ -79,14 +79,14 @@ int _printf(const char *format, ...)
 		if (identifierPrinted == -1 || identifierPrinted != 0)
 			i++;
 		if (identifierPrinted > 0)
-			charPrinted += identifierPrinted;
+			inputCount += identifierPrinted;
 
 		if (identifierPrinted == 0)
 		{
 			_putchar('%');
-			charPrinted++;
+			inputCount++;
 		}
 	}
 	va_end(arg);
-	return (charPrinted);
+	return (inputCount);
 }
